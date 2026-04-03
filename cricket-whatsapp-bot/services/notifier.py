@@ -1,6 +1,6 @@
 import json
 
-STATE_FILE = "data/state.json"
+STATE_FILE = "data/state.json" #
 
 def load_state():
     try:

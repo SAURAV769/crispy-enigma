@@ -1,4 +1,4 @@
-def format_msg(match):
+def format_msg(match):#
     score = match["score"][0]
     
     runs = score["r"]

@@ -1,4 +1,4 @@
-from twilio.rest import Client
+from twilio.rest import Client #
 from config.settings import *
 
 client = Client(TWILIO_SID, TWILIO_TOKEN)
