@@ -53,9 +53,7 @@ while True:
             send_message(message)
 
     # ⚡ Smart delay
-    sleep_time = get_sleep_time(overs)
-    wait(sleep_time)
-    
+    wait(30)
 print("🚀 Bot started...")
 
 while True:
