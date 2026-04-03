@@ -29,3 +29,17 @@ def should_send(match_id, score_key):
         return True
     
     return False
+
+def check_wicket(match_id, current_w):
+    state = load_state()
+    
+    prev_w = state.get(f"{match_id}_w", 0)
+    
+    if current_w > prev_w:
+        state[f"{match_id}_w"] = current_w
+        save_state(state)
+        return True
+    
+    state[f"{match_id}_w"] = current_w
+    save_state(state)
+    return False
