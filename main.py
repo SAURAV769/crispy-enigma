@@ -4,6 +4,21 @@ from services.notifier import should_send, check_wicket
 from utils.helpers import generate_score_key, get_sleep_time, wait
 from utils.formatter import format_message
 from config.settings import validate_settings
+import http.server
+import socketserver
+import threading
+
+def start_server():
+    PORT = 10000
+    handler = http.server.SimpleHTTPRequestHandler
+    
+    with socketserver.TCPServer(("", PORT), handler) as httpd:
+        print("🌐 Server running on port", PORT)
+        httpd.serve_forever()
+
+# server ko background me chalao
+threading.Thread(target=start_server, daemon=True).start()
+
 
 validate_settings()
 
