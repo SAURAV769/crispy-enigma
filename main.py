@@ -8,6 +8,13 @@ import http.server
 import socketserver
 import threading
 
+print("🚀 Bot started...")
+
+while True:
+    print("🔄 Checking matches...")
+    matches = get_all_matches()
+
+send_message("🔥 Test Message - Bot Active")
 def start_server():
     PORT = 10000
     handler = http.server.SimpleHTTPRequestHandler
@@ -54,10 +61,3 @@ while True:
 
     # ⚡ Smart delay
     wait(30)
-print("🚀 Bot started...")
-
-while True:
-    print("🔄 Checking matches...")
-    matches = get_all_matches()
-
-send_message("🔥 Test Message - Bot Active")
