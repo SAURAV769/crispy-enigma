@@ -41,7 +41,7 @@ while True:
     sleep_time = get_sleep_time(overs)
     wait(sleep_time)
     
-    print("🚀 Bot started...")
+print("🚀 Bot started...")
 
 while True:
     print("🔄 Checking matches...")
