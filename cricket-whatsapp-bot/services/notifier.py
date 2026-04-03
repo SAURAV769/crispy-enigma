@@ -1,24 +1,30 @@
 import json
+import os
 
-STATE_FILE = "data/state.json" #
+STATE_FILE = "data/state.json"
 
+# 📂 ensure file exists
 def load_state():
     try:
-        return json.load(open(STATE_FILE))
+        if not os.path.exists(STATE_FILE):
+            return {}
+        with open(STATE_FILE, "r") as f:
+            return json.load(f)
     except:
         return {}
 
 def save_state(state):
-    json.dump(state, open(STATE_FILE, "w"))
+    with open(STATE_FILE, "w") as f:
+        json.dump(state, f)
 
-def should_send(match):
+# 🎯 per match spam control
+def should_send(match_id, score_key):
     state = load_state()
     
-    score = match["score"][0]
-    key = f"{score['r']}-{score['w']}-{score['o']}"
+    last_score = state.get(match_id)
     
-    if state.get("last_score") != key:
-        state["last_score"] = key
+    if last_score != score_key:
+        state[match_id] = score_key
         save_state(state)
         return True
     

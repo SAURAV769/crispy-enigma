@@ -1,25 +1,25 @@
-import time #
+import time
 
-# 🧠 Safe dict access (API crash se bachne ke liye)
+# 🧠 Safe dict access
 def safe_get(data, key, default=None):
-    try:
+    if isinstance(data, dict):
         return data.get(key, default)
-    except:
-        return default
+    return default
 
 
-# 🏏 Score key banane ke liye (spam avoid)
+# 🏏 Score key (spam avoid)
 def generate_score_key(score):
-    try:
-        runs = score.get("r", 0)
-        wickets = score.get("w", 0)
-        overs = score.get("o", 0)
-        return f"{runs}-{wickets}-{overs}"
-    except:
+    if not isinstance(score, dict):
         return "0-0-0"
+    
+    runs = score.get("r", 0)
+    wickets = score.get("w", 0)
+    overs = score.get("o", 0)
+    
+    return f"{runs}-{wickets}-{overs}"
 
 
-# ⏱️ Overs ko float me convert (e.g. 15.3 overs)
+# ⏱️ Overs → float (15.3 → 15.5)
 def overs_to_float(overs):
     try:
         overs = float(overs)
@@ -32,18 +32,15 @@ def overs_to_float(overs):
 
 # ⚡ Last 5 overs check
 def is_last_5_overs(overs, total_overs=20):
-    overs_float = overs_to_float(overs)
-    return overs_float >= (total_overs - 5)
+    return overs_to_float(overs) >= (total_overs - 5)
 
 
-# 🔔 Smart sleep (fast update end me)
+# 🔔 Smart sleep (⚡ fast end overs)
 def get_sleep_time(overs):
-    if is_last_5_overs(overs):
-        return 10   # fast update
-    return 60       # normal update
+    return 10 if is_last_5_overs(overs) else 60
 
 
-# 📈 Required Run Rate calculate
+# 📈 Required Run Rate
 def calculate_rrr(target, current_runs, overs_done, total_overs=20):
     try:
         overs_float = overs_to_float(overs_done)
@@ -58,17 +55,11 @@ def calculate_rrr(target, current_runs, overs_done, total_overs=20):
         return 0.0
 
 
-# 🔴 Wicket detect
+# 🔴 Wicket detect (simple)
 def is_wicket_fallen(prev_wickets, current_wickets):
-    try:
-        return current_wickets > prev_wickets
-    except:
-        return False
+    return current_wickets > prev_wickets
 
 
-# ⏳ Delay helper (safe sleep)
+# ⏳ Safe sleep
 def wait(seconds):
-    try:
-        time.sleep(seconds)
-    except:
-        pass
+    time.sleep(seconds)
