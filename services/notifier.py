@@ -17,7 +17,7 @@ def save_state(state):
     with open(STATE_FILE, "w") as f:
         json.dump(state, f)
 
-# 🎯 per match spam control
+# 🎯 per match spam controlb
 def should_send(match_id, score_key):
     state = load_state()
     
