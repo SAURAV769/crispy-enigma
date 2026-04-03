@@ -3,6 +3,20 @@ import os
 
 STATE_FILE = "data/state.json"
 
+def load_state():
+    try:
+        # 📁 folder create karo agar nahi hai
+        os.makedirs("data", exist_ok=True)
+
+        if not os.path.exists(STATE_FILE):
+            with open(STATE_FILE, "w") as f:
+                json.dump({}, f)
+
+        with open(STATE_FILE, "r") as f:
+            return json.load(f)
+    except:
+        return {}
+        
 # 📂 ensure file exists
 def load_state():
     try:
@@ -14,6 +28,8 @@ def load_state():
         return {}
 
 def save_state(state):
+    os.makedirs("data", exist_ok=True)
+    
     with open(STATE_FILE, "w") as f:
         json.dump(state, f)
 
