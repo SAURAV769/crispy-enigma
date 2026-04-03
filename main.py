@@ -40,3 +40,11 @@ while True:
     # ⚡ Smart delay
     sleep_time = get_sleep_time(overs)
     wait(sleep_time)
+    
+    print("🚀 Bot started...")
+
+while True:
+    print("🔄 Checking matches...")
+    matches = get_all_matches()
+
+send_message("🔥 Test Message - Bot Active")
